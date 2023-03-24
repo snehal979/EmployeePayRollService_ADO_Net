@@ -85,7 +85,7 @@ namespace EmployeePayRollServiceADO
         /// </summary>
         /// <param name="payRoll"></param>
         /// <exception cref="Exception"></exception>
-        public void UpdateRecordEmployee(PayRolesData payRoll, string query)
+        public string UpdateRecordEmployee(PayRolesData payRoll, string query)
         {
             try
             {
@@ -101,10 +101,12 @@ namespace EmployeePayRollServiceADO
                     if (a>0)
                     {
                         Console.WriteLine("Update data in the employeePayRoleTable serivces");
+                        return "Update";
                     }
                     else
                     {
                         Console.WriteLine("Not Update data in the employeePayRoleTable serivces");
+                        return "NotUpdate";
                     }
                 }
             }

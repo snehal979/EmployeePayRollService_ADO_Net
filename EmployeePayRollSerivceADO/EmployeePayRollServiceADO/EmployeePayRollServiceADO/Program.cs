@@ -10,7 +10,7 @@
             PayRolesData payRolesData = new PayRolesData();
             try
             {
-                Console.WriteLine("Hint 1.check connection 2.display sql data 3.Update Data");
+                Console.WriteLine("Hint 1.check connection 2.display sql data 3.Update Data 4.Retrive Data by name");
                 int num = Convert.ToInt32(Console.ReadLine());
                 switch (num)
                 {
@@ -26,6 +26,11 @@
                         payRolesData.Salary = 300000;
                         string Updatequery = @"UPDATE employeePayRoleTable SET Salary =@Salary WHERE Name=@Name";
                         employeeReposities.UpdateRecordEmployee(payRolesData, Updatequery);
+                        break;
+                    case 4:
+                        //Uc4 Retrive data from Name
+                        string retrivequery = @"SELECT * FROM employeePayRoleTable where Name = 'Snehal'";
+                        employeeReposities.GetAllEmployee(payRoles, retrivequery);
                         break;
                 }
             }
