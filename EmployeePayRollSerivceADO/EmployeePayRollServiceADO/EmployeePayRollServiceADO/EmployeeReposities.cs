@@ -220,5 +220,92 @@ namespace EmployeePayRollServiceADO
                 this.sqlconnection.Close();
             }
         }
+        /// <summary>
+        /// Uc11-Insert data in ER-Diagram
+        /// </summary>
+        /// <param name="payRoll"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public void ER_AddRecordEmployee(PayRolesForER pay, string query)
+        {
+            try
+            {
+                using (this.sqlconnection)
+                {
+                    SqlCommand command = new SqlCommand(query, this.sqlconnection);
+                    command.Parameters.AddWithValue("@EmpName", pay.EmpName);
+                    command.Parameters.AddWithValue("@Gender", pay.Gender);
+                    command.Parameters.AddWithValue("@BasicPay", pay.BasicPay);
+                    command.Parameters.AddWithValue("@Deduction", pay.Deduction);
+                    command.Parameters.AddWithValue("@Tax", pay.Tax);
+
+                    this.sqlconnection.Open();
+                    int a = command.ExecuteNonQuery();
+                    if (a>0)
+                    {
+                        Console.WriteLine("Data Add in the employeePayRoleTable serivces");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not Data Add in the employeePayRoleTable serivces");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                this.sqlconnection.Close();
+            }
+        }
+        /// <summary>
+        /// Retrive ER-Diagram
+        /// </summary>
+        /// <param name="payRoleER"></param>
+        /// <param name="query"></param>
+        /// <exception cref="Exception"></exception>
+        public void ER_DIAGRAMGetAllEmployee(List<PayRolesForER> payRoleER, string query)
+        {
+            try
+            {
+                using (this.sqlconnection)
+                {
+                    this.sqlconnection.Open();
+                    SqlCommand command = new SqlCommand(query, this.sqlconnection);
+                    SqlDataReader dr = command.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            PayRolesForER service = new PayRolesForER();
+                            service.EmpId =dr.GetInt32(0);
+                            service.EmpName =dr.GetString(1);
+                            service.Gender =dr.GetString(2);
+                            service.BasicPay =dr.GetInt64(3);
+                            service.Deduction =dr.GetInt64(4);
+                            service.Tax = dr.GetInt64(5);
+                            service.NetPay =dr.GetInt64(6);
+
+                            payRoleER.Add(service);
+                        }
+                        foreach (var data in payRoleER)
+                        {
+                            Console.WriteLine(data.EmpId+" "+data.EmpName+"  "+data.Gender);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                this.sqlconnection.Close();
+            }
+        }
     }
 }

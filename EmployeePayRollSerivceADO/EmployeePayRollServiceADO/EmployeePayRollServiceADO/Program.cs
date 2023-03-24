@@ -11,6 +11,11 @@ namespace EmployeePayRollServiceADO
             List<PayRolesData> payRoles = new List<PayRolesData>();
             PayRolesData payRolesData = new PayRolesData();
             StoreProcedFetchPayRoll store = new StoreProcedFetchPayRoll();
+
+            //For ER 
+            List<PayRolesForER> payRoleERs = new List<PayRolesForER>();
+            PayRolesForER payER = new PayRolesForER();
+
             try
             {
                 Console.WriteLine("Hint 1.check connection 2.display sql data 3.Update Data 4.Retrive Data by name 5.Aggregate Function 6.Add data" +
@@ -61,7 +66,6 @@ namespace EmployeePayRollServiceADO
                                 long bAvg = employeeReposities.AggGetAllEmployee(payRoles, queryAvg);
                                 Console.WriteLine("Avg salary in data "+bAvg);
                                 break;
-
                         }
 
                         break;
@@ -96,6 +100,21 @@ namespace EmployeePayRollServiceADO
                         string queryDelect = @"DELETE FROM employeePayRoleTable WHERE Name = @Name";
                         payRolesData.Name="Terisa";
                         employeeReposities.DeleteRecordEmployee(payRolesData, queryDelect);
+                        break;
+                    case 12:
+                        string queryER = @"SELECT * FROM EmployeeDetail_ado AS C inner join Salary_ado AS D ON C.EmpId=D.EmpId";
+                        employeeReposities.ER_DIAGRAMGetAllEmployee(payRoleERs, queryER);
+                        break;
+                    case 13:
+                        string queryaddEr = @"INSERT INTO employeePayRoleTable(Name, Salary,Gender)VALUES(@Name,@Salary,@Gender) ";//correct
+                        payER.EmpName ="Terisa";
+                        payER.Gender = "Female";
+                        payER.BasicPay=14243535;
+                        payER.Deduction =22353;
+                        payER.Tax=353535;
+
+                        employeeReposities.ER_AddRecordEmployee(payER, queryaddEr);
+                        employeeReposities.ER_AddRecordEmployee(payER, queryaddEr);
                         break;
                 }
             }
