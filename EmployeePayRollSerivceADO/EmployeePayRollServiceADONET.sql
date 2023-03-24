@@ -64,3 +64,26 @@ End
 --execute spDeleteEmpByIdEmployee 8
 --------------------------------------------------------
 drop table employeePayRoleTable
+-------------------------------------------------------
+--Uc7
+--EMPLOYEE TABLE
+CREATE TABLE EmployeeDetail_ado(
+EmpId INT PRIMARY KEY IDENTITY(1,1),
+EmpName VARCHAR(150) NOT NULL,
+Gender VARCHAR(10) NOT NULL,
+);
+
+---Display---
+SELECT *FROM EmployeeDetail_ado;
+
+-- Salary Table
+CREATE TABLE Salary_ado(
+BasicPay BIGINT DEFAULT(000),
+Deduction BIGINT DEFAULT(000),
+Tax BIGINT DEFAULT(000),
+EmpId INT FOREIGN KEY REFERENCES EmployeeDetail_ado(EmpId),
+NetPay Bigint 
+);
+
+--Display
+SELECT *FROM Salary_ado;
