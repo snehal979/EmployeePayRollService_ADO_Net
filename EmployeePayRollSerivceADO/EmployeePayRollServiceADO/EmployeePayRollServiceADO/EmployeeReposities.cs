@@ -40,7 +40,7 @@ namespace EmployeePayRollServiceADO
         }
         /// <summary>
         /// Uc2 Get All Retrive
-        /// Uc 5Retrive all data In The DataBase
+        /// Uc 5 Retrive all data In The DataBase
         /// </summary>
         /// <param name="payRoles"></param>
         /// <exception cref="Exception"></exception>
@@ -109,6 +109,30 @@ namespace EmployeePayRollServiceADO
                         Console.WriteLine("Not Update data in the employeePayRoleTable serivces");
                         return "NotUpdate";
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                this.sqlconnection.Close();
+            }
+        }
+        /// <summary>
+        /// UC6 AggregateOrScalarFunction (sum,max.,min,avg,count)
+        /// </summary>
+        public long AggGetAllEmployee(List<PayRolesData> payRoles, string query)
+        {
+            try
+            {
+                using (this.sqlconnection)
+                {
+                    this.sqlconnection.Open();
+                    SqlCommand command = new SqlCommand(query, this.sqlconnection);
+                    long b = (long)command.ExecuteScalar();
+                    return b;
                 }
             }
             catch (Exception ex)
