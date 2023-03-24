@@ -14,6 +14,7 @@ INSERT INTO employeePayRoleTable(Name,Salary,Gender)VALUES
 ('Vaibhav',2000000.00,'Male'),
 ('Raju',2000000.00,'Male'),
 ('Lata',2000000.00,'Female');
-SELECT * FROM employeePayRoleTable
+SELECT * FROM employeePayRoleTable 
 INSERT INTO employeePayRoleTable(Name,Salary,Gender)VALUES
 ('Terisa',000000.00,'Female');
+SELECT * FROM employeePayRoleTable where Name ='Snehal'

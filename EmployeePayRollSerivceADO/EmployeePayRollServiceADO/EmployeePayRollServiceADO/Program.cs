@@ -10,7 +10,7 @@
             PayRolesData payRolesData = new PayRolesData();
             try
             {
-                Console.WriteLine("Hint 1.check connection 2.display sql data 3.Update Data 4.Retrive Data by name 5.Aggregate Function");
+                Console.WriteLine("Hint 1.check connection 2.display sql data 3.Update Data 4.Retrive Data by name 5.Aggregate Function 6.Add data");
                 int num = Convert.ToInt32(Console.ReadLine());
                 switch (num)
                 {
@@ -60,6 +60,13 @@
 
                         }
 
+                        break;
+                    case 6:
+                        string queryAdd = @"INSERT INTO employeePayRoleTable(Name, Salary,Gender)VALUES(@Name,@Salary,@Gender)";
+                        payRolesData.Name ="Rani";
+                        payRolesData.Salary =0000000;
+                        payRolesData.Gender = "Female";
+                        employeeReposities.AddRecordEmployee(payRolesData, queryAdd);
                         break;
                 }
             }

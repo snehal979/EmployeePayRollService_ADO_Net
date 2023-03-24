@@ -74,7 +74,7 @@ namespace EmployeePayRollServiceADO
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                Console.WriteLine(ex.Message);
             }
             finally
             {
@@ -138,6 +138,46 @@ namespace EmployeePayRollServiceADO
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+            finally
+            {
+                this.sqlconnection.Close();
+            }
+        }
+        /// <summary>
+        /// Uc 7 Add Contact
+        /// </summary>
+        /// <param name="payRoll"></param>
+        /// <exception cref="Exception"></exception>
+        public string AddRecordEmployee(PayRolesData payRoll, string query)
+        {
+            try
+            {
+                using (this.sqlconnection)
+                {
+                    SqlCommand command = new SqlCommand(query, this.sqlconnection);
+                    command.Parameters.AddWithValue("@Name", payRoll.Name);
+                    command.Parameters.AddWithValue("@Salary", payRoll.Salary);
+                    command.Parameters.AddWithValue("@Gender", payRoll.Gender);
+
+                    this.sqlconnection.Open();
+                    int a = command.ExecuteNonQuery();
+                    if (a>0)
+                    {
+                        Console.WriteLine("Data Add in the employeePayRoleTable serivces");
+                        return "Added";
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not Data Add in the employeePayRoleTable serivces");
+                        return "NotAdded";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Invalid Input");
             }
             finally
             {
