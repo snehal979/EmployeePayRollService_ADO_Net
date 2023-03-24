@@ -80,5 +80,42 @@ namespace EmployeePayRollServiceADO
                 this.sqlconnection.Close();
             }
         }
+        /// <summary>
+        /// UC3 Update data 
+        /// </summary>
+        /// <param name="payRoll"></param>
+        /// <exception cref="Exception"></exception>
+        public void UpdateRecordEmployee(PayRolesData payRoll, string query)
+        {
+            try
+            {
+                using (this.sqlconnection)
+                {
+                    SqlCommand command = new SqlCommand(query, this.sqlconnection);
+
+                    command.Parameters.AddWithValue("@Name", payRoll.Name);
+                    command.Parameters.AddWithValue("@Salary", payRoll.Salary);
+
+                    this.sqlconnection.Open();
+                    int a = command.ExecuteNonQuery();
+                    if (a>0)
+                    {
+                        Console.WriteLine("Update data in the employeePayRoleTable serivces");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not Update data in the employeePayRoleTable serivces");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                this.sqlconnection.Close();
+            }
+        }
     }
 }
