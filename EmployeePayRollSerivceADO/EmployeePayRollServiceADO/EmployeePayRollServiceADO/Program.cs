@@ -1,4 +1,6 @@
-﻿namespace EmployeePayRollServiceADO
+﻿using static System.Formats.Asn1.AsnWriter;
+
+namespace EmployeePayRollServiceADO
 {
     class Program
     {
@@ -8,9 +10,11 @@
             EmployeeReposities employeeReposities = new EmployeeReposities();
             List<PayRolesData> payRoles = new List<PayRolesData>();
             PayRolesData payRolesData = new PayRolesData();
+            StoreProcedFetchPayRoll store = new StoreProcedFetchPayRoll();
             try
             {
-                Console.WriteLine("Hint 1.check connection 2.display sql data 3.Update Data 4.Retrive Data by name 5.Aggregate Function 6.Add data");
+                Console.WriteLine("Hint 1.check connection 2.display sql data 3.Update Data 4.Retrive Data by name 5.Aggregate Function 6.Add data" +
+                    "\n CRUD OPERATION \n 7.fetch data show ,8.fetch data add,9.fetch data update,10.fetch data delete");
                 int num = Convert.ToInt32(Console.ReadLine());
                 switch (num)
                 {
@@ -67,6 +71,26 @@
                         payRolesData.Salary =0000000;
                         payRolesData.Gender = "Female";
                         employeeReposities.AddRecordEmployee(payRolesData, queryAdd);
+                        break;
+                    case 7:
+                        store.Fetch_GetAllEmployee(payRoles);
+                        break;
+                    case 8:
+                        payRolesData.Name ="Bharti";
+                        payRolesData.Salary =21454646;
+                        payRolesData.Gender = "Female";
+                        store.Fetch_AddRecordEmployee(payRolesData);
+                        break;
+                    case 9:
+                        payRolesData.Id = 7;
+                        payRolesData.Name ="Raghvi";
+                        payRolesData.Salary =21454646;
+                        payRolesData.Gender = "Female";
+                        store.Fetch_UpdateRecordEmployee(payRolesData);
+                        break;
+                    case 10:
+                        payRolesData.Id = 9;
+                        store.Fetch_DeleteRecordEmployee(payRolesData);
                         break;
                 }
             }
