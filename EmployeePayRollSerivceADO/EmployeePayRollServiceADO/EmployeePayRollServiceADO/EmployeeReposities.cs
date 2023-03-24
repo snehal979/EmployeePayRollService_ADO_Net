@@ -172,12 +172,48 @@ namespace EmployeePayRollServiceADO
                         Console.WriteLine("Not Data Add in the employeePayRoleTable serivces");
                         return "NotAdded";
                     }
-
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception("Invalid Input");
+            }
+            finally
+            {
+                this.sqlconnection.Close();
+            }
+        }
+        /// <summary>
+        /// UC 12 Delete data
+        /// </summary>
+        /// <param name="payRoll"></param>
+        /// <exception cref="Exception"></exception>
+        public void DeleteRecordEmployee(PayRolesData payRoll, string query)
+        {
+            try
+            {
+                using (this.sqlconnection)
+                {
+
+                    SqlCommand command = new SqlCommand(query, this.sqlconnection);
+                    command.Parameters.AddWithValue("@Name", payRoll.Name);
+                    //command.Parameters.AddWithValue("@Id", payRoll.Id);
+
+                    this.sqlconnection.Open();
+                    int a = command.ExecuteNonQuery();
+                    if (a > 0)
+                    {
+                        Console.WriteLine("Data Delete in the employeePayRoleTable serivces");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not Data Delete in the employeePayRoleTable serivces");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
             finally
             {

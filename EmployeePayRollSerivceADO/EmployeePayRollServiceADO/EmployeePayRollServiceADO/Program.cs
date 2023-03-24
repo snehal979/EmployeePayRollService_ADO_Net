@@ -92,6 +92,11 @@ namespace EmployeePayRollServiceADO
                         payRolesData.Id = 9;
                         store.Fetch_DeleteRecordEmployee(payRolesData);
                         break;
+                    case 11:
+                        string queryDelect = @"DELETE FROM employeePayRoleTable WHERE Name = @Name";
+                        payRolesData.Name="Terisa";
+                        employeeReposities.DeleteRecordEmployee(payRolesData, queryDelect);
+                        break;
                 }
             }
             catch (Exception ex)
