@@ -40,6 +40,7 @@ namespace EmployeePayRollServiceADO
         }
         /// <summary>
         /// Uc2 Get All Retrive
+        /// Uc 5Retrive all data In The DataBase
         /// </summary>
         /// <param name="payRoles"></param>
         /// <exception cref="Exception"></exception>
